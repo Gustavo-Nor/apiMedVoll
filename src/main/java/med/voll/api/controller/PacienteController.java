@@ -47,15 +47,15 @@ public class PacienteController {
 
         return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
     }
-//
-//    @PutMapping
-//    @Transactional
-//    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
-//        var medico = repository.getReferenceById(dados.id());
-//        medico.atualizarInformacoes(dados);
-//
-//        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
-//    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualiazacaoPaciente dados){
+        var paciente = repository.getReferenceById(dados.id());
+        paciente.atualizarInformacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+    }
 //
 //    @DeleteMapping("/{id}")
 //    @Transactional

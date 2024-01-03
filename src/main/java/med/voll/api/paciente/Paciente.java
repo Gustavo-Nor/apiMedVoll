@@ -52,7 +52,7 @@ public class Paciente {
         }
     }
 
-//    public void excluir() {
-//        this.active = false;
-//    }
+    public void excluir() {
+        this.active = false;
+    }
 }

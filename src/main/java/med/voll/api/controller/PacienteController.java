@@ -3,13 +3,12 @@ package med.voll.api.controller;
 import jakarta.validation.Valid;
 import med.voll.api.endereco.Endereco;
 import med.voll.api.medico.*;
-import med.voll.api.paciente.DadosCadastroPaciente;
-import med.voll.api.paciente.DadosDetalhamentoPaciente;
-import med.voll.api.paciente.Paciente;
-import med.voll.api.paciente.PacienteRepository;
+import med.voll.api.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -35,19 +34,19 @@ public class PacienteController {
         return ResponseEntity.created(uri).body(new DadosDetalhamentoPaciente(paciente));
     }
 
-//    @GetMapping
-//    public ResponseEntity<Page<DadosListagemMedico>> listar(Pageable paginacao){
-//        var page = repository.findAllByActiveTrue(paginacao).map(DadosListagemMedico::new);
-//
-//        return ResponseEntity.ok(page);
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity detalhar(@PathVariable Long id){
-//        var medico = repository.getReferenceById(id);
-//
-//        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
-//    }
+    @GetMapping
+    public ResponseEntity<Page<DadosListagemPaciente>> listar(@PageableDefault(size = 10) Pageable paginacao){
+        var page = repository.findAllByActiveTrueOrderByNome(paginacao).map(DadosListagemPaciente::new);
+
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id){
+        var paciente = repository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+    }
 //
 //    @PutMapping
 //    @Transactional

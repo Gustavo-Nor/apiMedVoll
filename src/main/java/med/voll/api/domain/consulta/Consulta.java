@@ -32,4 +32,16 @@ public class Consulta {
     private Paciente paciente;
 
     private LocalDateTime data;
+    private String motivoCancelamento;
+
+    public Consulta(Object id, Medico medico, Paciente paciente, LocalDateTime data, String motivoCancelamento) {
+        this.medico = medico;
+        this.paciente = paciente;
+        this.data = data;
+    }
+
+    public void Consulta() {}
+    public void atualizarInformacoes(DadosCancelamentoConsulta dados) {
+        this.motivoCancelamento = dados.motivoCancelamento();
+    }
 }

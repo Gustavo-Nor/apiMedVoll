@@ -17,6 +17,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
             AND m.id not in(
                 SELECT c.medico.id from Consulta c
                 WHERE c.data = :data
+                AND c.motivoCancelamento is null
             )
             ORDER BY random()
             limit 1

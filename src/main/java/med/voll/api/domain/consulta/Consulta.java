@@ -44,4 +44,8 @@ public class Consulta {
     public void atualizarInformacoes(DadosCancelamentoConsulta dados) {
         this.motivoCancelamento = dados.motivoCancelamento();
     }
+
+    public void atualizarDataConsulta(DadosAgendamentoConsulta dados) {
+        this.data = dados.data();
+    }
 }

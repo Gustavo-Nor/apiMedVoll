@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("medicos")
-@SecurityRequirement(name = "bearer-key")
+//@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired
@@ -34,16 +34,16 @@ public class MedicoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemMedico>> listar(Pageable paginacao){
-        var page = repository.findAllByActiveTrue(paginacao).map(DadosListagemMedico::new);
-        return ResponseEntity.ok(page);
+    public ResponseEntity getAllMedicos(){
+        var medicos = repository.findAllByActiveTrue().stream().map(DadosListagemMedico::new).toList();
+        return ResponseEntity.ok(medicos);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id){
         var medico = repository.getReferenceById(id);
 
-        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
+        return ResponseEntity.ok(new DadosListagemMedico(medico));
     }
 
     @PutMapping

@@ -16,8 +16,8 @@ public class ValidadorCancelamentoAntecedenciaMinima implements ValidadorCancela
     @Autowired
     private ConsultaRepository repository;
 
-    public void validarCancelamento(DadosCancelamentoConsulta dados){
-        var consulta = repository.findById(dados.id()).get();
+    public void validarCancelamento(Long id, DadosCancelamentoConsulta dados){
+        var consulta = repository.findById(id).get();
         var dataConsulta = consulta.getData();
         var agora = LocalDateTime.now();
         var diferencaEmMinutos = Duration.between(agora, dataConsulta).toHours();

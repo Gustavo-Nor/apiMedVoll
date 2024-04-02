@@ -4,5 +4,5 @@ import med.voll.api.domain.consulta.DadosCancelamentoConsulta;
 
 public interface ValidadorCancelamentoDeConsulta {
 
-    void validarCancelamento(DadosCancelamentoConsulta dados);
+    void validarCancelamento(Long id, DadosCancelamentoConsulta dados);
 }

@@ -7,12 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.domain.endereco.Endereco;
 
-@Table(name = "medicos")
-@Entity(name = "Medico")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+    @Table(name = "medicos")
+    @Entity(name = "Medico")
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @EqualsAndHashCode(of = "id")
 public class Medico {
 
     @Id
@@ -22,6 +22,7 @@ public class Medico {
     private String email;
     private String telefone;
     private String crm;
+    private String imageURL;
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
     @Embedded
@@ -34,6 +35,7 @@ public class Medico {
         this.email = dados.email();
         this.telefone = dados.telefone();
         this.crm = dados.crm();
+        this.imageURL = dados.imageURL();
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
     }

@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 
 public record DadosCancelamentoConsulta(
 
-        @NotNull
-        Long id,
 
         @NotNull
         String motivoCancelamento) {

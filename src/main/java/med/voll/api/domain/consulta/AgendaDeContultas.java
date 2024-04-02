@@ -3,6 +3,7 @@ package med.voll.api.domain.consulta;
 import med.voll.api.domain.ValidacaoException;
 import med.voll.api.domain.consulta.validacoes.ValidadorAgendamenteDeConsulta;
 import med.voll.api.domain.consulta.validacoes.ValidadorCancelamentoDeConsulta;
+import med.voll.api.domain.medico.DadosAtualizacaoMedico;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.paciente.PacienteRepository;
@@ -60,17 +61,28 @@ public class AgendaDeContultas {
         return medicoRepository.escolherMedicoAleatorioLivreNaData(dados.especialidade(), dados.data());
     }
 
-    public DadosDetalhamentoConsulta cancelar(DadosCancelamentoConsulta dados) {
+    public DadosDetalhamentoConsulta cancelar(Long id, DadosCancelamentoConsulta dados) {
 
-        if(!consultaRepository.existsById(dados.id())){
+        if(!consultaRepository.existsById(id)){
             throw new ValidacaoException("Consulta não existe");
         }
 
-        validadoresCancelamento.forEach(v -> v.validarCancelamento(dados));
+        validadoresCancelamento.forEach(v -> v.validarCancelamento(id, dados));
 
-        var consulta = consultaRepository.findById(dados.id()).get();
+        var consulta = consultaRepository.findById(id).get();
         consulta.atualizarInformacoes(dados);
 
         return new DadosDetalhamentoConsulta(consulta);
+    }
+
+    public DadosDetalhamentoConsulta reagendar(Consulta consulta, DadosAgendamentoConsulta dados) {
+
+        validarores.forEach(v -> v.validar(dados));
+
+       if (dados.data() != null) {
+           consulta.atualizarDataConsulta(dados);
+       }
+
+       return new DadosDetalhamentoConsulta(consulta);
     }
 }

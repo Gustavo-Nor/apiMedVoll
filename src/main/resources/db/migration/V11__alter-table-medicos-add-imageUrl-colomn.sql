@@ -1,0 +1,1 @@
+alter table medicos add column imageUrl varchar(200);
